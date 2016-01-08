@@ -6,9 +6,9 @@
     <!--已完成劇情：level1_1、level1_2、level2_1-->
     <!--標點符號：...取代為…  !?，、為全形  「」也是全形 ()為半形-->
     
-	<string-array name="drama_level1_0">
-		<item>Hello world!</item>
-	</string-array>
+    <string-array name="drama_level1_0">
+    	<item>Hello world!</item>
+    </string-array>
 
     <string-array name="drama_level1_1">
         <item>戰士：「嘿！我要跟你介紹新的同伴！」</item>
