@@ -179,7 +179,8 @@ public class LevelActivity extends Activity {
                         break;
                     case 2:
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level3_2));
-                        passwd = "859";
+                        passwd = "759";
+                        key.edit().putBoolean("WARRIOR",true).commit();
                         setTreasure(true);
                         break;
                     case 3:
@@ -188,7 +189,8 @@ public class LevelActivity extends Activity {
                         break;
                     case 4:
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level3_4));
-                        passwd = "889";
+                        passwd = "779";
+                        key.edit().putBoolean("WARRIOR",false).commit();
                         setTreasure(true);
                         break;
                 }
@@ -220,16 +222,27 @@ public class LevelActivity extends Activity {
                 }
                 break;
             case 5:
+                passwd = "0000";
                 switch (side) {
                     case 1:
+                        setTreasure(true);
+                        key.edit().putBoolean("WARRIOR",false).commit();
                         break;
                     case 2:
+                        setTreasure(false);
                         break;
                     case 3:
+                        setTreasure(false);
                         break;
                     case 4:
+                        setTreasure(true);
+                        key.edit().putBoolean("WARRIOR",true).commit();
                         break;
                 }
+                break;
+            case 6:
+                startActivity(new Intent(LevelActivity.this, ChooseActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); // 按下返回鍵不會返回上一頁
                 break;
             case 1:
             default:
