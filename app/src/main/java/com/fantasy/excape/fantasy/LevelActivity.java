@@ -103,9 +103,10 @@ public class LevelActivity extends Activity {
 
                 String input = passwdEdit.getText().toString();
                 if (input.length() == passwd.length()) {
-                    // 如果密碼正確時
+                    // 當密碼相同時
                     if (input.equals(passwd)) {
                         dialog.hide();
+                        // 跳轉到劇情
                         Intent intent = new Intent(LevelActivity.this, DramaActivity.class);
                         startActivity(intent);
                         LevelActivity.this.finish();
@@ -287,7 +288,8 @@ public class LevelActivity extends Activity {
 
     public void setTreasure(boolean visible) {
         treasure.setBackgroundDrawable(getResources().getDrawable(R.drawable.treasure));
-        // 設定寶箱不.setEnabled(visible);
+        // 設定寶箱不可互動
+        treasure.setEnabled(visible);
         // 不可見
         if(visible)
             treasure.setVisibility(View.VISIBLE);
@@ -312,6 +314,5 @@ public class LevelActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
 }

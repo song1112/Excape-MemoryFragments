@@ -8,26 +8,35 @@
     android:background="#444444">
 
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/monster"
-        android:background="#f6f4ef"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_alignParentBottom="true">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#f6f4ef"
-        android:text="New Button"
-        android:id="@+id/monk"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:layout_above="@+id/monster"
-        android:layout_centerHorizontal="true" />
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左"
+            android:id="@+id/monster"
+            android:background="#f6f4ef"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/abc_action_bar_overflow_padding_end_material" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f6f4ef"
+            android:text="右"
+            android:id="@+id/monk"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/abc_action_bar_overflow_padding_end_material" />
+    </LinearLayout>
 
 </RelativeLayout>
