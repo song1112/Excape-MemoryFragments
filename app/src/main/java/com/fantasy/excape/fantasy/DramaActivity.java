@@ -58,7 +58,7 @@ public class DramaActivity extends Activity {
                                 int wizard = key.getInt("WIZARD", 0) + 1;
                                 key.edit().putInt("WIZARD", wizard).commit();
                             }
-                            Log.i("log", "WARRIOR:" + key.getInt("WARRIOR", 0)+"，WIZARD"+key.getInt("WIZARD:", 0));
+                            Log.i("log", "WARRIOR:" + key.getInt("WARRIOR", 0)+"，WIZARD:"+key.getInt("WIZARD", 0));
                         }
 
 
