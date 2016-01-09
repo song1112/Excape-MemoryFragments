@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +27,9 @@ import android.widget.Toast;
  * Created by song on 2016/1/5.
  */
 public class LevelActivity extends Activity {
+    private long lastBackTime = 0;
+    //当前按下返回键的系统时间
+    private long currentBackTime = 0;
     private SharedPreferences key;
     private int level;
     Button treasure;
@@ -34,6 +38,7 @@ public class LevelActivity extends Activity {
     private int role;
     private String passwd;
     private int side=1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +61,8 @@ public class LevelActivity extends Activity {
         RelativeLayout.LayoutParams btParams = new RelativeLayout.LayoutParams (height/6, height/6);
         btParams.leftMargin = width/3;
         btParams.topMargin = height/7 * 4;
-
         Builder builder = new Builder(this);
+
         // 設定畫面
         setLevelLayout();
         level_layout.addView(treasure, btParams);
@@ -84,6 +89,8 @@ public class LevelActivity extends Activity {
         final AlertDialog dialog = builder.show();
 
         final EditText passwdEdit = (EditText) layout.findViewById(R.id.password);
+
+        // 監聽文字變化
         passwdEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -96,10 +103,12 @@ public class LevelActivity extends Activity {
 
                 String input = passwdEdit.getText().toString();
                 if (input.length() == passwd.length()) {
+                    // 如果密碼正確時
                     if (input.equals(passwd)) {
                         dialog.hide();
-                        startActivity(new Intent(LevelActivity.this, DramaActivity.class)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); // 按下返回鍵不會返回上一頁
+                        Intent intent = new Intent(LevelActivity.this, DramaActivity.class);
+                        startActivity(intent);
+                        LevelActivity.this.finish();
                     }
                     else {
                         dialog.hide();
@@ -150,13 +159,13 @@ public class LevelActivity extends Activity {
                     case 1:
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level2_1));
                         passwd = "135";
-                        key.edit().putBoolean("WARRIOR",false).commit();
+                        key.edit().putBoolean("ISWARRIOR",false).commit();
                         key.edit().putInt("FLAG1", 2).commit();
                         setTreasure(true);
                         break;
                     case 2:
                         passwd = "313";
-                        key.edit().putBoolean("WARRIOR",true).commit();
+                        key.edit().putBoolean("ISWARRIOR",true).commit();
                         key.edit().putInt("FLAG1", 1).commit();
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level2_2));
                         setTreasure(true);
@@ -179,7 +188,8 @@ public class LevelActivity extends Activity {
                         break;
                     case 2:
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level3_2));
-                        passwd = "859";
+                        passwd = "759";
+                        key.edit().putBoolean("ISWARRIOR",true).commit();
                         setTreasure(true);
                         break;
                     case 3:
@@ -188,7 +198,8 @@ public class LevelActivity extends Activity {
                         break;
                     case 4:
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level3_4));
-                        passwd = "889";
+                        passwd = "779";
+                        key.edit().putBoolean("ISWARRIOR",false).commit();
                         setTreasure(true);
                         break;
                 }
@@ -203,8 +214,8 @@ public class LevelActivity extends Activity {
                         break;
                     case 2:
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level4_2));
-                        key.edit().putBoolean("WARRIOR",false).commit();
-                        key.edit().putInt("FLAG1", 2).commit();
+                        key.edit().putBoolean("ISWARRIOR",false).commit();
+                        key.edit().putInt("FLAG2", 2).commit();
                         setTreasure(true);
                         break;
                     case 3:
@@ -213,23 +224,39 @@ public class LevelActivity extends Activity {
                         break;
                     case 4:
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level4_4));
-                        key.edit().putBoolean("WARRIOR",true).commit();
-                        key.edit().putInt("FLAG1", 1).commit();
+                        key.edit().putBoolean("ISWARRIOR",true).commit();
+                        key.edit().putInt("FLAG2", 1).commit();
                         setTreasure(true);
                         break;
                 }
                 break;
             case 5:
+                passwd = "100100100100";
                 switch (side) {
                     case 1:
+                        level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level5_1));
+                        setTreasure(true);
+                        key.edit().putBoolean("ISWARRIOR",false).commit();
                         break;
                     case 2:
+                        level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level5_2));
+                        setTreasure(false);
                         break;
                     case 3:
+                        level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level5_3));
+                        setTreasure(false);
                         break;
                     case 4:
+                        level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level5_4));
+                        setTreasure(true);
+                        key.edit().putBoolean("ISWARRIOR",true).commit();
                         break;
                 }
+                break;
+            case 6:
+                startActivity(new Intent(LevelActivity.this, ChooseActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); // 按下返回鍵不會返回上一頁
+                LevelActivity.this.finish();
                 break;
             case 1:
             default:
@@ -237,7 +264,7 @@ public class LevelActivity extends Activity {
                     case 1:
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level1_1));
                         passwd = "154";
-                        key.edit().putBoolean("WARRIOR",true).commit();
+                        key.edit().putBoolean("ISWARRIOR",true).commit();
                         setTreasure(true);
                         break;
                     case 2:
@@ -247,7 +274,7 @@ public class LevelActivity extends Activity {
                     case 3:
                         level_layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.level1_3));
                         passwd = "143";
-                        key.edit().putBoolean("WARRIOR",false).commit();
+                        key.edit().putBoolean("ISWARRIOR",false).commit();
                         setTreasure(true);
                         break;
                     case 4:
@@ -260,11 +287,31 @@ public class LevelActivity extends Activity {
 
     public void setTreasure(boolean visible) {
         treasure.setBackgroundDrawable(getResources().getDrawable(R.drawable.treasure));
-        treasure.setEnabled(visible);
+        // 設定寶箱不.setEnabled(visible);
+        // 不可見
         if(visible)
             treasure.setVisibility(View.VISIBLE);
         else
             treasure.setVisibility(View.INVISIBLE);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //捕获返回键按下的事件
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            //获取当前系统时间的毫秒数
+            currentBackTime = System.currentTimeMillis();
+            //比较上次按下返回键和当前按下返回键的时间差，如果大于2秒，则提示再按一次退出
+            if(currentBackTime - lastBackTime > 2 * 1000){
+                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                lastBackTime = currentBackTime;
+            }else{ //如果两次按下的时间差小于2秒，则退出程序
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
 }
