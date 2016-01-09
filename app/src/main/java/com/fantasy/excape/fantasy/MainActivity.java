@@ -5,15 +5,18 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.app.Activity;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
     private SharedPreferences key;
     private int level;
     Button start, newgame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,24 +32,35 @@ public class MainActivity extends Activity {
             start.setEnabled(false);
             start.setVisibility(View.INVISIBLE);
         }
+
+        // 按下繼續
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("log", "continue");
                 Intent intent = new Intent(MainActivity.this, LevelActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
 
+        // 按下新遊戲
         newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("log", "newgame");
+                // 清除紀錄
                 key.edit().clear();
                 key.edit().putInt("LEVEL", 0).commit();
+                key.edit().putInt("WARRIOR", 0).commit();
+                key.edit().putInt("WIZARD", 0).commit();
+                // 先跳轉到開頭劇情
                 Intent intent = new Intent(MainActivity.this, DramaActivity.class);
                 startActivity(intent);
+                MainActivity.this.finish();
             }
         });
     }
+
+
 }
