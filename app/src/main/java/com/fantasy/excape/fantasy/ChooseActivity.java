@@ -43,6 +43,7 @@ public class ChooseActivity extends Activity {
                 }
                 Intent intent = new Intent(ChooseActivity.this, DramaActivity.class);
                 startActivity(intent);
+                ChooseActivity.this.finish();
 
             }
         };

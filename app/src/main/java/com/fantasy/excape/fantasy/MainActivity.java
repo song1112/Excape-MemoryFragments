@@ -15,7 +15,7 @@ public class MainActivity extends Activity {
 
     private SharedPreferences key;
     private int level;
-    Button start, newgame;
+    Button start, newgame, explain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
 
         start = (Button)findViewById(R.id.start);
         newgame = (Button)findViewById(R.id.newgame);
+        explain = (Button)findViewById(R.id.explain);
 
         if (level==0) {
             start.setEnabled(false);
@@ -50,7 +51,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Log.i("log", "newgame");
                 // 清除紀錄
-                key.edit().clear();
+                key.edit().clear();key.edit().clear();
                 key.edit().putInt("LEVEL", 0).commit();
                 key.edit().putInt("WARRIOR", 0).commit();
                 key.edit().putInt("WIZARD", 0).commit();
@@ -58,6 +59,13 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(MainActivity.this, DramaActivity.class);
                 startActivity(intent);
                 MainActivity.this.finish();
+            }
+        });
+
+        explain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ExplainActivity.class));
             }
         });
     }
