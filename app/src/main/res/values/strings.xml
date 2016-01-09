@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Fantasy</string>
 
+    <string name="start">繼續</string>
+    <string name="newgame">新遊戲</string>
+    <string name="explain">說明</string>
+
+    <string name="left">左</string>
+    <string name="right">右</string>
     <!--劇本命名規則:drama_level[關卡號]_[角色]-->
     <!--角色:1是戰士，2是法師-->
     <!--已完成劇情：level1_1、level1_2、level2_1-->
@@ -463,5 +469,21 @@
         <item>程式(Java)：Song</item>
         <item>程式(XML)：Song / 骨灰君</item>
         <item>感謝您的遊玩 /(_ _)\\ </item>
+    </string-array>
+
+    <string-array name="explain_question">
+        <item>這是什麼</item>
+        <item>如何遊玩</item>
+        <item>如何儲存</item>
+        <item>其他問題</item>
+        <item>多國語言</item>
+    </string-array>
+
+    <string-array name="explain_answer">
+        <item>這是一款密室逃脫遊戲，你需要靠著牆上的提示解開寶箱的密碼，逃出密室！</item>
+        <item>點擊繼續或是新遊戲即可開始，黑畫面是進到劇情畫面，點擊字可繼續下一段話，在關卡畫面中，你可以左右滑動來面對不同的面，點擊寶箱輸入你解開的密碼。</item>
+        <item>遊戲中每進到新的關卡就會自動儲存，若你要重頭開始請按下新遊戲。</item>
+        <item>請點擊此聯絡開發者</item>
+        <item>目前不提供此服務，如果你有興趣翻譯，可以到我們的github找到string.xml檔，將所有的文字翻譯，我們APP中的所有文字皆存於此(點擊此段文字可連結到github)。</item>
     </string-array>
 </resources>
