@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
                 Log.i("log", "newgame");
                 // 清除紀錄
                 key.edit().clear();key.edit().clear();
-                key.edit().putInt("LEVEL", 0).commit();
+                key.edit().putInt("LEVEL", -1).commit();
                 key.edit().putInt("WARRIOR", 0).commit();
                 key.edit().putInt("WIZARD", 0).commit();
                 // 先跳轉到開頭劇情

@@ -53,8 +53,6 @@ public class DramaActivity extends Activity {
                     level++;
                     switch (level) {
                         case 7:
-                            count=0; // 重載對話
-                            break;
                         case 8:
                             count=0;
                             break;
@@ -66,6 +64,7 @@ public class DramaActivity extends Activity {
                             break;
                         default:
                             if (level != 0 && level!= 6) {
+                                Log.i("log","Level:" + level);
                                 // 如果選擇是戰士寶箱，戰士+1
                                 if (isWarrior) {
                                     int warrior = key.getInt("WARRIOR", 0) + 1;
